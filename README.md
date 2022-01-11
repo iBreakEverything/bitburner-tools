@@ -67,6 +67,8 @@ Create an alias to be able to use in terminal:
 ### RCE
 Remote execute script on specified target with maximum threads.
 
+### RenameNsToJs
+Prints a command to change '.ns' extension to '.js'.
 
 ### Rootkit
 Grants administrator access on all vulnerable servers.
