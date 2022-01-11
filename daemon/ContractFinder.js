@@ -1,7 +1,8 @@
 import { pathToServer } from '/scripts/lib/ServerObjectTools.js';
 import { executeTerminalCommand } from '/scripts/lib/StandaloneTools.js';
 
-/** 
+
+/**
  * Contract Finder
  * Finds contracts and displays them in the player stats gui.
  * @remarks RAM cost: 1.95 GB
@@ -37,7 +38,7 @@ export async function main(ns) {
  * @param {Document} doc		DOM tree
  * @param {Element} anchor		HTML element where all the new elements will be added as children
  * @param {String} host			Hostname of the machine where a contract was found.
- * @param {[String]} contracts	Array of contract filenames.
+ * @param {Array<String>} contracts	Array of contract filenames.
  */
 async function addContractHTMLNode(ns, rawServersData, doc, anchor, host, contracts) {
 	// Deep copy HP node
