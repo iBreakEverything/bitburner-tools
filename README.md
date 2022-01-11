@@ -5,6 +5,8 @@
 ### ContractFinder
 Finds contracts and displays them in the player stats gui. Includes one click connect button to to the server hosting the contract.
 
+![ContractFinder](.res/ContractFinder.png)
+
 *Dependencies*:
 * `lib/ServerObjectTools.js`
 * `lib/StandaloneTools.js`
@@ -51,6 +53,8 @@ Basic hack for demo. Replace with your own.
 
 ### PathToServer
 Prints the command to connect to host.
+
+![ContractFinder](.res/PathToServer.gif)
 
 Create an alias to be able to use in terminal:
 
