@@ -23,7 +23,7 @@ export async function main(ns) {
         clearContracts(doc);
         // Check every server for contracts
         for (let host of hosts) {
-            let contracts = ns.ls(host, 'contract');
+            let contracts = ns.ls(host, '.cct');
             if (contracts.length > 0) {
                 await addContractHTMLNode(ns, rawServersData, doc, anchor, host, contracts);
             }
