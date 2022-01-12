@@ -25,10 +25,10 @@ export async function main(ns) {
         for (let host of hosts) {
             let contracts = ns.ls(host, '.cct');
             if (contracts.length > 0) {
-                await addContractHTMLNode(ns, rawServersData, doc, anchor, host, contracts);
+                await addContractHTMLNode(rawServersData, doc, anchor, host, contracts);
             }
         }
-        await ns.sleep(3 * 60 * 1000);
+        await ns.sleep(2 * 60 * 1000);
     }
 }
 
@@ -55,17 +55,13 @@ async function addContractHTMLNode(rawServersData, doc, anchor, host, contracts)
     // Button to delete notification
     const deleteButton = doc.createElement('button');
     deleteButton.innerText = '❌';
-    deleteButton.classList = anchor.querySelector('button').classList;
+    deleteButton.classList = anchor.parentNode.nextSibling.querySelector('button').classList;
     deleteButton.onclick = function () { doc.querySelector('#' + trElement.id).remove() };
     // Add button
     trElement.children[1].firstElementChild.innerHTML = '';
     trElement.children[1].firstElementChild.appendChild(deleteButton);
     // Add Node
     anchor.appendChild(trElement);
-
-    /**
-     * 
-     */
 }
 
 /**
