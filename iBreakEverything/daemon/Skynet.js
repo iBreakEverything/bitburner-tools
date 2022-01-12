@@ -35,7 +35,7 @@ export async function main(ns) {
             ns.rm(rootedServersFile, home);
         }
 
-        let servers = await listFarmableServers(ns, rawServersData, ns.getScriptRam(_hack));
+        let servers = await listFarmableServers(rawServersData, ns.getScriptRam(_hack));
         if (servers.length > 0) {
             ns.print(`INFO: {${new Date().toISOString()}} New farmable servers:\n${servers}`);
             for(let server of servers) {
@@ -45,7 +45,7 @@ export async function main(ns) {
         }
 
         let tools = countCrackingTools(ns);
-        let next = await nextHackableServer(ns, rawServersData, tools);
+        let next = await nextHackableServer(rawServersData, tools);
         if (Number.MAX_SAFE_INTEGER == next) {
             if (tools < 5) {
                 ns.print(`WARN: {${new Date().toISOString()}} Not enough tools to crack more servers. Buy some more.`);
@@ -60,7 +60,7 @@ export async function main(ns) {
             ns.toast(`[SKYNET] Next NUKE at ${next} hacking.`, 'info', 1 * 60 * 1000);
         }
         while (!surveillanceMode && next > ns.getHackingLevel()) {
-            next = await nextHackableServer(ns, rawServersData, tools);
+            next = await nextHackableServer(rawServersData, tools);
             await ns.sleep(60 * 1000);
         }
         await ns.sleep(250);
