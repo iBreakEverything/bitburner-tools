@@ -13,7 +13,7 @@ export async function main(ns) {
         const hostsList = JSON.parse(rawData);
         const hostnames = hostsList.reduce((acc, elem) => { acc.push(elem.hostname); return acc; }, []);
         hostnames.forEach(host => {
-            let contracts = ns.ls(host, 'contract');
+            let contracts = ns.ls(host, '.cct');
             for (let contract of contracts) {
                 let type = ns.codingcontract.getContractType(contract, host);
                 let data = ns.codingcontract.getData(contract, host);
