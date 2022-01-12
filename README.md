@@ -5,7 +5,7 @@
 ### ContractFinder
 Finds contracts and displays them in the player stats gui. Includes one click connect button to to the server hosting the contract.
 
-![ContractFinder](.res/ContractFinder.png)
+![ContractFinder](.res/ContractFinder.gif)
 
 *Dependencies*:
 * `lib/ServerObjectTools.js`
