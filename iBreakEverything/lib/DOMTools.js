@@ -9,9 +9,9 @@
  * @param {String} command
  */
 export function executeTerminalCommand(command) {
-    const doc = eval("document");
-    const terminal = doc.querySelector("#terminal-input");
-    if (terminal && !terminal.hasAttribute("disabled")) {
+    const doc = eval('document');
+    const terminal = doc.querySelector('#terminal-input');
+    if (terminal && !terminal.hasAttribute('disabled')) {
         const keys = Reflect.ownKeys(terminal);
         terminal.value = command;
         terminal[keys[1]].onChange({ target: terminal });

@@ -1,6 +1,6 @@
 /**
  * Basic hack for demo. Replace with your own.
- * @param {NS} ns
+ * @param {import('..').NS} ns
  * @arg0 hostName
  */
 export async function main(ns) {

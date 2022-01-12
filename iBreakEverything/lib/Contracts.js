@@ -5,28 +5,28 @@
  * @return {String|Number} Contract solution
  */
 export function solveContract(type, data) {
-	let contracts = {
-		"Algorithmic Stock Trader I": curry(algorithmicStockTrader)(1),
-		"Algorithmic Stock Trader II": curry(algorithmicStockTrader)(2),
-		"Algorithmic Stock Trader III": curry(algorithmicStockTrader)(3),
-		"Algorithmic Stock Trader IV": curry(algorithmicStockTrader)(4),
-		"Array Jumping Game": arrayJumpingGame,
-		"Find All Valid Math Expressions": findAllValidMathExpressions,
-		"Find Largest Prime Factor": findLargestPrimeFactor,
-		"Generate IP Addresses": generateIPAddresses,
-		"Merge Overlapping Intervals": mergeOverlappingIntervals,
-		"Minimum Path Sum in a Triangle": minimumPathSuminaTriangle,
-		"Sanitize Parentheses in Expression": sanitizeParenthesesinExpression,
-		"Spiralize Matrix": spiralizeMatrix,
-		"Subarray with Maximum Sum": subarraywithMaximumSum,
-		"Total Ways to Sum": totalWaystoSum,
-		"Unique Paths in a Grid I": uniquePathsinaGridI,
-		"Unique Paths in a Grid II": uniquePathsinaGridII,
-	}
-	if (contracts[type]) {
-		return contracts[type](data);
-	}
-	return null;
+    let contracts = {
+        'Algorithmic Stock Trader I': curry(algorithmicStockTrader)(1),
+        'Algorithmic Stock Trader II': curry(algorithmicStockTrader)(2),
+        'Algorithmic Stock Trader III': curry(algorithmicStockTrader)(3),
+        'Algorithmic Stock Trader IV': curry(algorithmicStockTrader)(4),
+        'Array Jumping Game': arrayJumpingGame,
+        'Find All Valid Math Expressions': findAllValidMathExpressions,
+        'Find Largest Prime Factor': findLargestPrimeFactor,
+        'Generate IP Addresses': generateIPAddresses,
+        'Merge Overlapping Intervals': mergeOverlappingIntervals,
+        'Minimum Path Sum in a Triangle': minimumPathSuminaTriangle,
+        'Sanitize Parentheses in Expression': sanitizeParenthesesinExpression,
+        'Spiralize Matrix': spiralizeMatrix,
+        'Subarray with Maximum Sum': subarraywithMaximumSum,
+        'Total Ways to Sum': totalWaystoSum,
+        'Unique Paths in a Grid I': uniquePathsinaGridI,
+        'Unique Paths in a Grid II': uniquePathsinaGridII,
+    }
+    if (contracts[type]) {
+        return contracts[type](data);
+    }
+    return null;
 }
 
 /**
@@ -35,11 +35,11 @@ export function solveContract(type, data) {
  * @param {Function} f Function to curry
  */
 function curry(f) {
-	return function (a) {
-		return function (b) {
-			return f(a, b);
-		};
-	};
+    return function (a) {
+        return function (b) {
+            return f(a, b);
+        };
+    };
 }
 
 /**
@@ -56,30 +56,30 @@ function curry(f) {
  * @returns {Number}
  */
 function algorithmicStockTrader(type, data) {
-	let transactionLimit;
-	let stocksArray;
-	switch (type) {
-		case 1:
-			transactionLimit = 1;
-			stocksArray = data;
-			break;
-		case 2:
-			// As many as you like (i think the limit is data.length/2 + 1)
-			transactionLimit = data.length;
-			stocksArray = data;
-			break;
-		case 3:
-			transactionLimit = 2;
-			stocksArray = data;
-			break;
-		case 4:
-			transactionLimit = data[0];
-			stocksArray = data[1];
-			break;
-		default:
-			return null;
-	}
-	return null;
+    let transactionLimit;
+    let stocksArray;
+    switch (type) {
+        case 1:
+            transactionLimit = 1;
+            stocksArray = data;
+            break;
+        case 2:
+            // As many as you like (i think the limit is data.length/2 + 1)
+            transactionLimit = data.length;
+            stocksArray = data;
+            break;
+        case 3:
+            transactionLimit = 2;
+            stocksArray = data;
+            break;
+        case 4:
+            transactionLimit = data[0];
+            stocksArray = data[1];
+            break;
+        default:
+            return null;
+    }
+    return null;
 }
 
 /**
@@ -93,8 +93,8 @@ function algorithmicStockTrader(type, data) {
  * @returns {Number} 0 or 1
  */
 function arrayJumpingGame(data) {
-	let arr = data;
-	return null;
+    let arr = data;
+    return null;
 }
 
 /**
@@ -106,9 +106,9 @@ function arrayJumpingGame(data) {
  * @returns {Array<String>}
  */
 function findAllValidMathExpressions(data) {
-	let string = data[0];
-	let targetNumber = data[1];
-	return null;
+    let string = data[0];
+    let targetNumber = data[1];
+    return null;
 }
 
 /**
@@ -118,8 +118,8 @@ function findAllValidMathExpressions(data) {
  * @returns {Number}
  */
 function findLargestPrimeFactor(data) {
-	let number = data;
-	return null;
+    let number = data;
+    return null;
 }
 
 /**
@@ -131,8 +131,8 @@ function findLargestPrimeFactor(data) {
  * @returns {Array<String>} Array with strings.
  */
 function generateIPAddresses(data) {
-	let string = data;
-	return null;
+    let string = data;
+    return null;
 }
 
 /**
@@ -144,8 +144,8 @@ function generateIPAddresses(data) {
  * @returns {Array<Array<Number>>} Array of arrays of 2 numbers
  */
 function mergeOverlappingIntervals(data) {
-	let arr = data;
-	return null;
+    let arr = data;
+    return null;
 }
 
 /**
@@ -158,8 +158,8 @@ function mergeOverlappingIntervals(data) {
  * @returns {Number}
  */
 function minimumPathSuminaTriangle(data) {
-	let matrix = data;
-	return null;
+    let matrix = data;
+    return null;
 }
 
 /**
@@ -172,8 +172,8 @@ function minimumPathSuminaTriangle(data) {
  * @returns {Array<String>}
  */
 function sanitizeParenthesesinExpression(data) {
-	let string = data;
-	return null;
+    let string = data;
+    return null;
 }
 
 /**
@@ -183,8 +183,8 @@ function sanitizeParenthesesinExpression(data) {
  * @returns {Array}
  */
 function spiralizeMatrix(data) {
-	let matrix = data;
-	return null;
+    let matrix = data;
+    return null;
 }
 
 /**
@@ -194,8 +194,8 @@ function spiralizeMatrix(data) {
  * @returns {Number}
  */
 function subarraywithMaximumSum(data) {
-	let arr = data;
-	return null;
+    let arr = data;
+    return null;
 }
 
 /**
@@ -205,8 +205,8 @@ function subarraywithMaximumSum(data) {
  * @returns {Array}
  */
 function totalWaystoSum(data) {
-	let number = data;
-	return null;
+    let number = data;
+    return null;
 }
 
 /**
@@ -219,9 +219,9 @@ function totalWaystoSum(data) {
  * @returns {Number}
  */
 function uniquePathsinaGridI(data) {
-	let m = data[0];
-	let n = data[1];
-	return null;
+    let m = data[0];
+    let n = data[1];
+    return null;
 }
 
 /**
@@ -237,6 +237,6 @@ function uniquePathsinaGridI(data) {
  * @returns {Number}
  */
 function uniquePathsinaGridII(data) {
-	let matrix = data;
-	return null;
+    let matrix = data;
+    return null;
 }

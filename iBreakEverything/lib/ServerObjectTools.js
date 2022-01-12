@@ -1,5 +1,5 @@
 /**
- * Tools that manipulate a list of server objects.
+ * Tools that manipulate a server objects or a list of server objects.
  * Some functions require the extended server object list that can be
  * aquired by running /util/ServerMapper.js and reading the created file.
  * To get a server object for a hostname run ns.getServer(hostname).
@@ -12,7 +12,7 @@
  * @param {String} hostname
  * @return {String} connect command
  */
-export async function pathToServer(rawServersData, hostname="home") {
+export async function pathToServer(rawServersData, hostname='home') {
     const hostsList = JSON.parse(rawServersData);
     let server = hostsList.find((elem) => {
         if (elem.hostname == hostname) {
@@ -20,7 +20,7 @@ export async function pathToServer(rawServersData, hostname="home") {
         }
         return false;
     });
-    return server ? [...server.pathFromHome, hostname].join("; connect ") : null;
+    return server ? [...server.pathFromHome, hostname].join('; connect ') : null;
 }
 
 /**
@@ -73,7 +73,7 @@ export async function listFarmableServers(rawServersData, scriptRam) {
  */
  export function isHackable(serverObject, data) {
     // Don't hack home
-    if (serverObject.hostname == "home") {
+    if (serverObject.hostname == 'home') {
         return false;
     }
     // Already have root access.
