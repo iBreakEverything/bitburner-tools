@@ -43,7 +43,7 @@ export async function main(ns) {
         }
     }
     const counts = { dirs: 0, files: 0 };
-    let printMe = ['\\'];
+    let printMe = ['/'];
     walk(printMe, tree, '', counts);
     printMe.push(`\n${counts.dirs} directories, ${counts.files} files`);
     ns.tprint(`INFO: Filesystem tree\n${printMe.join('\n')}`);
