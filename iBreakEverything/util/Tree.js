@@ -6,6 +6,8 @@
  * @arg {String} hostname Target
  */
 export async function main(ns) {
+    const FORMAT_COMAND = true;
+
     let tree = {};
     if (ns.args[0]) {
         if (!ns.serverExists(ns.args[0])) {
@@ -47,6 +49,10 @@ export async function main(ns) {
     walk(printMe, tree, '', counts);
     printMe.push(`\n${counts.dirs} directories, ${counts.files} files`);
     ns.tprint(`INFO: Filesystem tree\n${printMe.join('\n')}`);
+    if (FORMAT_COMAND) {
+        await ns.sleep(50);
+        formatCommand();
+    }
 }
 
 /**
@@ -78,4 +84,12 @@ function walk(printMe, dir, prefix, counts) {
             }
         }
     }
+}
+
+/**
+ * Formats the tree command to be more compact.
+ */
+function formatCommand() {
+    let doc = eval("document");
+    doc.querySelector('#terminal').lastChild.firstChild.style.lineHeight = 1;
 }
