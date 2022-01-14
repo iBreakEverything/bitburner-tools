@@ -55,7 +55,7 @@ function walk(printMe, serversList, tree, prefix) {
 /**
  * Formats the tree command to be more compact.
  */
- function formatCommand(lineHeight) {
+function formatCommand(lineHeight) {
     let doc = eval("document");
     doc.querySelector('#terminal').lastChild.firstChild.style.lineHeight = lineHeight;
 }
