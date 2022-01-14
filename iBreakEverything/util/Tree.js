@@ -1,7 +1,8 @@
 /**
  * Prints the filesystem tree.
  * @alias tree='run /iBreakEverything/util/Tree.js'
- * @usage tree <hostname>
+ * @usage tree [hostname]
+ * @remarks RAM cost: 1.9 GB
  * @param {import('..').NS} ns
  * @arg {String} hostname Target
  */

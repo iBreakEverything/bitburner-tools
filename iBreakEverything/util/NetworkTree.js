@@ -3,6 +3,7 @@
  * @requires /iBreakEverything/util/ServerMapper.js
  * @alias networkTree='run /iBreakEverything/util/ServerMapper.js; run /iBreakEverything/util/NetworkTree.js'
  * @usage networkTree
+ * @remarks RAM cost: 1.6 GB
  * @param {import('..').NS} ns
  */
 export async function main(ns) {
@@ -31,10 +32,10 @@ export async function main(ns) {
  */
 function addServer(cursor, pathFromHome) {
     if (!cursor[pathFromHome[0]]) {
-        cursor[pathFromHome[0]] = {}
+        cursor[pathFromHome[0]] = {};
     }
     if (pathFromHome.length > 1) {
-        addServer(cursor[pathFromHome[0]], pathFromHome.slice(1))
+        addServer(cursor[pathFromHome[0]], pathFromHome.slice(1));
     }
 }
 
