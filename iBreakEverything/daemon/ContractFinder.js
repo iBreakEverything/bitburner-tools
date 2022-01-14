@@ -7,13 +7,16 @@ import { executeTerminalCommand } from '/iBreakEverything/lib/DOMTools.js';
  * Finds contracts and displays them in the player stats gui.
  * @remarks RAM cost: 1.95 GB
  * @param {import('..').NS} ns
- * @fixme
  */
 export async function main(ns) {
     const rawServersData = await ns.read('/iBreakEverything/data/servers.txt');
     const serversList = JSON.parse(rawServersData);
     const hosts = serversList.reduce((acc, elem) => { acc.push(elem.hostname); return acc; }, []);
     const doc = eval('document');
+    ns.atExit(function () { // Clean-up on exit
+        clearContracts(doc);
+        doc.querySelector('#contract-anchor').click();
+    });
     // Stats Table
     const anchor = doc.querySelector('.MuiTableBody-root');
     initUI(doc, anchor);
@@ -35,10 +38,10 @@ export async function main(ns) {
 /**
  * Adds a contract notifier to the status UI.
  * @param {String} rawServersData JSONed list of server objects
- * @param {Document} doc		DOM tree
- * @param {Element} anchor		HTML element where all the new elements will be added as children
- * @param {String} host			Hostname of the machine where a contract was found.
- * @param {Array<String>} contracts	Array of contract filenames.
+ * @param {Document} doc DOM tree
+ * @param {Element} anchor HTML element where all the new elements will be added as children
+ * @param {String} host Hostname of the machine where a contract was found.
+ * @param {Array<String>} contracts Array of contract filenames.
  */
 async function addContractHTMLNode(rawServersData, doc, anchor, host, contracts) {
     // Deep copy HP node
@@ -66,7 +69,7 @@ async function addContractHTMLNode(rawServersData, doc, anchor, host, contracts)
 
 /**
  * Removes all contract notifiers.
- * @param {Document} doc	DOM tree
+ * @param {Document} doc DOM tree
  */
 function clearContracts(doc) {
     let elements = doc.querySelectorAll('.contract-remove');
@@ -77,8 +80,8 @@ function clearContracts(doc) {
 
 /**
  * Initialize UI by creating a table row element in the status ui.
- * @param {Document} doc	DOM tree
- * @param {Element} anchor	HTML element used to store new contracts as child elements
+ * @param {Document} doc DOM tree
+ * @param {Element} anchor HTML element used to store new contracts as child elements
  */
 function initUI(doc, anchor) {
     const id = 'contract-anchor';
