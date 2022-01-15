@@ -18,7 +18,7 @@ export async function main(ns) {
     }
     let printMe = [];
     walk(printMe, serversList, networkTree, '');
-    ns.tprint(printMe.join('\n'));
+    ns.tprint(`\n${printMe.join('\n')}`);
     if (FORMAT_COMAND) {
         await ns.sleep(50);
         formatCommand(LINE_HEIGHT);

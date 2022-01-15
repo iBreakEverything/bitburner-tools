@@ -3,6 +3,9 @@ import { pathToServer } from '/iBreakEverything/lib/ServerObjectTools.js';
 
 
 /**
+ * @requires /iBreakEverything/util/ServerMapper.js
+ * @requires /iBreakEverything/lib/DOMTools.js
+ * @requires /iBreakEverything/lib/ServerObjectTools.js
  * @remarks RAM cost: 1.6 GB
  * @param {import('..').NS} ns
  */
@@ -32,7 +35,7 @@ export async function main(ns) {
         ns.tprint('ERROR: Can\'t find log message box.');
         return;
     }
-    scriptLogMessagePool.parentNode.style.width = '450px';  // FIXME buggy Resize box
+    scriptLogMessagePool.parentNode.style.width = '480px';  // FIXME buggy Resize box
     let firstMessage = scriptLogMessagePool.firstChild;
     if (!firstMessage) {
         ns.tprint('ERROR: Can\'t find first log message.');
@@ -45,21 +48,39 @@ export async function main(ns) {
     for (let server of serversList) {
         addServer(networkTree, [...server.pathFromHome, server.hostname]);
     }
-    let printMe = ['home'];
-    walk(printMe, serversList, networkTree.home, '', Array(...firstMessage.classList).join(' '));
+    let classString = Array(...firstMessage.classList).join(' ');
+    let printMe = [`<span class='${classString}' id='connect_home' style='line-height:1;text-decoration:none;background-color:#00F0C015'>home</span>`];
+    walk(printMe, serversList, networkTree.home, '', classString);
     scriptLogMessagePool.firstChild.style.lineHeight = 1.1;
     scriptLogMessagePool.firstChild.innerHTML = printMe.join('\n');
-    // TODO backdoor and rooted
+    /* Functionality: connect, root status, backdoor+status */
     for (let server of serversList) {
-        let element = doc.querySelector(`#connect_${server.hostname.replaceAll('.', 'DOT')}`);
-        if (!element) {
-            continue;
+        let connectElem = doc.querySelector(`#connect_${server.hostname.replaceAll('.', 'DOT')}`);
+        let connectCommand = await pathToServer(JSON.stringify(serversList), server.hostname);
+        if (connectElem) {
+            connectElem.onclick = function () {
+                executeTerminalCommand(connectCommand);
+            };
         }
-        let path = await pathToServer(JSON.stringify(serversList), server.hostname);
-        element.onclick = function () {
-            executeTerminalCommand(path);
-        };
+        let nukeElem = doc.querySelector(`#nuke_${server.hostname.replaceAll('.', 'DOT')}`);
+        if (nukeElem) {
+            let nukeSymbol = server.hasAdminRights == true ? '☢' : '⛝';
+            let nukeCommand = 'run BruteSSH.exe; run FTPCrack.exe; run relaySMTP.exe; run HTTPWorm.exe; run SQLInject.exe; run NUKE.exe';
+            nukeElem.innerText = nukeSymbol;
+            nukeElem.onclick = function () {
+                executeTerminalCommand(`${connectCommand}; ${nukeCommand}`);
+            }
+        }
+        let backdoorElem = doc.querySelector(`#backdoor_${server.hostname.replaceAll('.', 'DOT')}`);
+        if (backdoorElem) {
+            let backdoorSymbol = server.backdoorInstalled == true ? '⚿' : '⛝';
+            backdoorElem.innerText = backdoorSymbol;
+            backdoorElem.onclick = function () {
+                executeTerminalCommand(`${connectCommand}; backdoor`);
+            }
+        }
     }
+    //flatten Array(...document.getElementsByClassName("prefix-tree-hide")).map(x => x.hidden=!x.hidden)
 }
 
 function addServer(cursor, pathFromHome) {
@@ -78,9 +99,10 @@ function walk(printMe, serversList, tree, prefix, classString) {
     }
     for (let host in hostnames) {
         const parts = host == hostnames.length - 1 ? ['└─', '  '] : ['├─', '│ '];
-        
-        let payload = `<span class='${classString}' id='connect_${hostnames[host].replaceAll('.', 'DOT')}' style='line-height:1;text-decoration:none;background-color:#00F0C015'>${hostnames[host]}</span>`;//TODO span rooted+backdoor
-        printMe.push(`${prefix}${parts[0]}${payload}`);
+        let treePrefix = `<span class='${classString} prefix-tree-hide' style='line-height:1;'>${prefix}${parts[0]}</span>`;
+        let payload = `<span class='${classString}' id='connect_${hostnames[host].replaceAll('.', 'DOT')}' style='line-height:1;text-decoration:none;background-color:#00F0C015'>${hostnames[host]}</span>`;
+        let stats = `<span class='${classString}' id='nuke_${hostnames[host].replaceAll('.', 'DOT')}' style='line-height:1;'></span><span class='${classString}' id='backdoor_${hostnames[host].replaceAll('.', 'DOT')}' style='line-height:1;'></span>`;
+        printMe.push(`${treePrefix}${payload}${stats}`);
         walk(printMe, serversList, tree[hostnames[host]], `${prefix}${parts[1]}`, classString);
     }
 }
