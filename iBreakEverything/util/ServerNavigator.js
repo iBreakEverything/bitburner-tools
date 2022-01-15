@@ -64,20 +64,26 @@ export async function main(ns) {
         }
         let nukeElem = doc.querySelector(`#nuke_${server.hostname.replaceAll('.', 'DOT')}`);
         if (nukeElem) {
-            let nukeSymbol = server.hasAdminRights == true ? '☢' : '⛝';
-            let nukeCommand = 'run BruteSSH.exe; run FTPCrack.exe; run relaySMTP.exe; run HTTPWorm.exe; run SQLInject.exe; run NUKE.exe';
-            nukeElem.innerText = nukeSymbol;
-            nukeElem.onclick = function () {
-                executeTerminalCommand(`${connectCommand}; ${nukeCommand}`);
+            let nukeSymbol = '☢';
+            if (!server.hasAdminRights) {
+                nukeSymbol = '⛝';
+                let nukeCommand = 'run BruteSSH.exe; run FTPCrack.exe; run relaySMTP.exe; run HTTPWorm.exe; run SQLInject.exe; run NUKE.exe';
+                nukeElem.onclick = function () {
+                    executeTerminalCommand(`${connectCommand}; ${nukeCommand}`);
+                }
             }
+            nukeElem.innerText = nukeSymbol;
         }
         let backdoorElem = doc.querySelector(`#backdoor_${server.hostname.replaceAll('.', 'DOT')}`);
         if (backdoorElem) {
-            let backdoorSymbol = server.backdoorInstalled == true ? '⚿' : '⛝';
-            backdoorElem.innerText = backdoorSymbol;
-            backdoorElem.onclick = function () {
-                executeTerminalCommand(`${connectCommand}; backdoor`);
+            let backdoorSymbol = '⚿';
+            if (!server.backdoorInstalled) {
+                backdoorSymbol = '⛝';
+                backdoorElem.onclick = function () {
+                    executeTerminalCommand(`${connectCommand}; backdoor`);
+                }
             }
+            backdoorElem.innerText = backdoorSymbol;
         }
     }
     //flatten Array(...document.getElementsByClassName("prefix-tree-hide")).map(x => x.hidden=!x.hidden)
