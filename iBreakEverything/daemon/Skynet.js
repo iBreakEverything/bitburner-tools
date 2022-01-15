@@ -53,15 +53,19 @@ export async function main(ns) {
             } else {
                 ns.print(`WARN: {${new Date().toISOString()}} No more servers to crack.\nSkynet is now in surveillance mode and will check on scripts and restarts them in case of crash.`);
                 surveillanceMode = true;
-                ns.toast('[SKYNET] I am watching you.', 'success', 1 * 60 * 1000);
+                ns.toast('[SKYNET] I am watching you.', 'success', 30 * 1000);
             }
         } else {
             ns.print(`INFO: {${new Date().toISOString()}} Next server can be cracked at hacking level ${next}.`);
             ns.toast(`[SKYNET] Next NUKE at ${next} hacking.`, 'info', 1 * 60 * 1000);
         }
-        while (!surveillanceMode && next > ns.getHackingLevel()) {
-            next = await nextHackableServer(rawServersData, tools);
-            await ns.sleep(60 * 1000);
+        while (next > ns.getHackingLevel()) {
+            if (!surveillanceMode) {
+                next = await nextHackableServer(rawServersData, tools);
+                await ns.sleep(60 * 1000);
+            } else {
+                await ns.sleep(5 * 60 * 1000);
+            }
         }
         await ns.sleep(250);
     }
